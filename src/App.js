@@ -1,25 +1,34 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Forecast from './components/Forecast/Forecast.js';
+import SearchBar from './components/SearchBar/SearchBar.js'
 import logo from './logo.svg';
 import './App.css';
+import WeatherAPI from './util/WeatherAPI.js'
 
-class App extends Component {
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      days: []
+    };
+    this.searchWeatherAPI = this.searchWeatherAPI.bind(this);
+  }
+
+  searchWeatherAPI(city, country) {
+    console.log(`Searching for weather in ${city} ${country}`);
+    WeatherAPI.search(city, country).then(days => {
+      this.setState({days: days});
+      console.log(this.state.days);
+    });
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>Weather App</h1>
+        <SearchBar searchWeatherAPI={this.searchWeatherAPI}/>
+        <Forecast days={this.state.days}/>
       </div>
     );
   }
