@@ -6,9 +6,11 @@ class Forecast extends React.Component {
   render() {
     return(
       <div className="Forecast">
-        {this.props.days.map(day => {
-          return <Weather key={day.id} weather={day} />
-        })}
+        {
+          this.props.days.map((day) => {
+            return <Weather key={day.id} weather={day} />
+          })
+        }
       </div>
     );
   }

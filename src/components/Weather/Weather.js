@@ -7,8 +7,11 @@ class Weather extends React.Component {
     return (
       <div className="Weather">
         <div className="Weather-information">
+          <img src={this.props.weather.icon} alt=''/>
+          <p><b>temperature(F)</b></p>
           <p>{this.props.weather.temp}</p>
           <p>{this.props.weather.condition}</p>
+          <p><b>humidity</b></p>
           <p>{this.props.weather.humidity}</p>
         </div>
       </div>
